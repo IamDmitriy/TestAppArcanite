@@ -4,16 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".FeedActivity"
+    android:background="#eeeeee">
 
-    <TextView
-        android:id="@+id/tvTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ExpandableListView
+        android:id="@+id/exListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:divider="@drawable/line"
+        android:childDivider="#eeeeee"
+        android:dividerHeight="8dp"
+        android:clipToPadding="false"
+        android:indicatorLeft="250dp"
+        android:indicatorRight="300dp"
+        android:padding="8dp"
+        android:scrollbars="none"
+        tools:listitem="@layout/user_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
