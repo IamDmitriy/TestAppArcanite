@@ -1,47 +1,94 @@
 package com.easyapps.testapparcanite
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.observe
+import com.easyapps.testapparcanite.model.Post
 import com.easyapps.testapparcanite.model.User
-import com.easyapps.testapparcanite.repository.PostRepository
-import com.easyapps.testapparcanite.repository.PostRepositoryImpl
-import com.easyapps.testapparcanite.repository.UserRepository
-import com.easyapps.testapparcanite.repository.UserRepositoryImpl
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 
 class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
+    private val viewModel: FeedViewModel by viewModels()
+    private lateinit var adapter: UserAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val adapter = UserAdapter(this)
+        adapter = UserAdapter(this)
         exListView.setAdapter(adapter)
 
-        val userRepository: UserRepository = UserRepositoryImpl()
-        val postRepository: PostRepository = PostRepositoryImpl()
-
-        launch {
-            val userList:List<User> = userRepository.getAll()
-            var output: String = ""
-            userList.forEach {
-                output+=it.toString()
-                output+=it.name
-            }
-
-
-            val postMap = postRepository.getMapAll()
-            postMap.forEach{
-                it.value.forEach{
-                    output += it.title
+        viewModel.uiState.observe(this) { state ->
+            when (state) {
+                is UiState.Start -> {
+                    setUiStateStart()
+                }
+                is UiState.EmptyProgress -> {
+                    setUiStateEmptyProgress()
+                }
+                is UiState.Success -> {
+                    setUiStateSuccess(state.userList, state.postMap)
+                }
+                is UiState.Error -> {
+                    setUiStateError()
+                }
+                is UiState.InternetAccessError -> {
+                    setUiStateInternetAccessError()
                 }
             }
-
-            adapter.setDataAndUpdate(userList, postMap)
         }
+
+        btnTryLoadData.setOnClickListener {
+            viewModel.loadData()
+        }
+    }
+
+    private fun setUiStateStart() {
+        btnTryLoadData.visibility = View.VISIBLE
+        tvInfoMessage.visibility = View.VISIBLE
+        exListView.visibility = View.GONE
+        progressBar.visibility = View.GONE
+
+        tvInfoMessage.text = getString(R.string.upload_users_and_posts_message)
+        btnTryLoadData.text = getString(R.string.upload)
+    }
+
+    private fun setUiStateEmptyProgress() {
+        btnTryLoadData.visibility = View.GONE
+        tvInfoMessage.visibility = View.GONE
+        exListView.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun setUiStateSuccess(userList: List<User>, postMap: Map<Long, List<Post>>) {
+        btnTryLoadData.visibility = View.GONE
+        tvInfoMessage.visibility = View.GONE
+        exListView.visibility = View.VISIBLE
+        progressBar.visibility = View.GONE
+
+        adapter.setDataAndUpdate(userList, postMap)
+    }
+
+    private fun setUiStateError() {
+        btnTryLoadData.visibility = View.VISIBLE
+        tvInfoMessage.visibility = View.VISIBLE
+        exListView.visibility = View.GONE
+        progressBar.visibility = View.GONE
+
+        tvInfoMessage.text = getString(R.string.error_message)
+    }
+
+    private fun setUiStateInternetAccessError() {
+        btnTryLoadData.visibility = View.VISIBLE
+        tvInfoMessage.visibility = View.VISIBLE
+        exListView.visibility = View.GONE
+        progressBar.visibility = View.GONE
+
+        tvInfoMessage.text = getString(R.string.internet_access_error_message)
+        btnTryLoadData.text = getString(R.string.try_again)
     }
 }

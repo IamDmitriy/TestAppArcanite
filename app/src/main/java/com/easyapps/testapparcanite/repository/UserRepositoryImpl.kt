@@ -14,8 +14,8 @@ class UserRepositoryImpl : UserRepository {
         val response = api.getAllUsers()
 
         if (response.isSuccessful) {
-            val postResponseDtoList: List<UserResponseDto> = requireNotNull(response.body())
-            return postResponseDtoList.map(UserResponseDto.Companion::toModel)
+            val userResponseDtoList: List<UserResponseDto> = requireNotNull(response.body())
+            return userResponseDtoList.map(UserResponseDto.Companion::toModel)
         } else throw IOException()
     }
 

@@ -6,4 +6,9 @@
     <string name="choose_email_client">Choose email client:</string>
     <string name="email_client_not_selected">Email client not selected...</string>
     <string name="email_from">Email from</string>
+    <string name="upload">upload</string>
+    <string name="upload_users_and_posts_message">Upload users and posts</string>
+    <string name="error_message">Oops, something went wrong</string>
+    <string name="internet_access_error_message">Sorry, no internet access</string>
+    <string name="try_again">try again</string>
 </resources>
