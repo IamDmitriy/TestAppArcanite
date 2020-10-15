@@ -1,4 +1,4 @@
-package com.easyapps.testapparcanite
+package com.easyapps.testapparcanite.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

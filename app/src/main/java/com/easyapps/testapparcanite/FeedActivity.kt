@@ -7,19 +7,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import com.easyapps.testapparcanite.model.Post
 import com.easyapps.testapparcanite.model.User
+import com.easyapps.testapparcanite.viewmodel.FeedViewModel
+import com.easyapps.testapparcanite.viewmodel.UiState
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 
 class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     private val viewModel: FeedViewModel by viewModels()
-    private lateinit var adapter: UserAdapter
+    private lateinit var adapter: UserAndPostsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapter = UserAdapter(this)
+        adapter = UserAndPostsAdapter(this)
         exListView.setAdapter(adapter)
 
         viewModel.uiState.observe(this) { state ->

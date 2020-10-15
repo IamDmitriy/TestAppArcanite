@@ -4,7 +4,7 @@
     <string name="phone_label">Phone: </string>
     <string name="hello">Hello!</string>
     <string name="choose_email_client">Choose email client:</string>
-    <string name="email_client_not_selected">Email client not selected...</string>
+    <string name="email_client_not_selected">Email client not selected…</string>
     <string name="email_from">Email from</string>
     <string name="upload">upload</string>
     <string name="upload_users_and_posts_message">Upload users and posts</string>

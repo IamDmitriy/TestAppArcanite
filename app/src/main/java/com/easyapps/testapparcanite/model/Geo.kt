@@ -1,6 +1,6 @@
 package com.easyapps.testapparcanite.model
 
-class Geo(
+data class Geo(
     val lat: Double,
     val lon: Double
 )

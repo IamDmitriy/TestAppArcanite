@@ -4,7 +4,7 @@ import com.easyapps.testapparcanite.model.Address
 import com.easyapps.testapparcanite.model.Company
 import com.easyapps.testapparcanite.model.User
 
-class UserResponseDto(
+data class UserResponseDto(
     val id: Long,
     val name: String,
     val username: String,
@@ -16,14 +16,14 @@ class UserResponseDto(
 ) {
     companion object {
         fun toModel(dto: UserResponseDto) = User(
-        dto.id,
-        dto.name,
-        dto.username,
-        dto.email,
-        dto.address,
-        dto.phone,
-        dto.website,
-        dto.company
+            dto.id,
+            dto.name,
+            dto.username,
+            dto.email,
+            dto.address,
+            dto.phone,
+            dto.website,
+            dto.company
         )
     }
 }

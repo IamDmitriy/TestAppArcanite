@@ -2,7 +2,7 @@ package com.easyapps.testapparcanite.dto
 
 import com.easyapps.testapparcanite.model.Post
 
-class PostResponseDto(
+data class PostResponseDto(
     val userId: Long,
     val id: Long,
     val title: String,

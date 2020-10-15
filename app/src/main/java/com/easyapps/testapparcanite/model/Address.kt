@@ -1,6 +1,6 @@
 package com.easyapps.testapparcanite.model
 
-class Address(
+data class Address(
     val street: String,
     val suite: String,
     val city: String,

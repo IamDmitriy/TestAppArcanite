@@ -1,6 +1,6 @@
 package com.easyapps.testapparcanite.model
 
-class Post(
+data class Post(
     val userId: Long,
     val id: Long,
     val title: String,

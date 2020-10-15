@@ -13,7 +13,7 @@ import com.easyapps.testapparcanite.model.User
 import kotlinx.android.synthetic.main.post_item.view.*
 import kotlinx.android.synthetic.main.user_item.view.*
 
-class UserAdapter(val context: Context) : BaseExpandableListAdapter() {
+class UserAndPostsAdapter(private val context: Context) : BaseExpandableListAdapter() {
     private var userList: List<User> = listOf()
     private var postMap: Map<Long, List<Post>> = mapOf()
 
@@ -44,11 +44,11 @@ class UserAdapter(val context: Context) : BaseExpandableListAdapter() {
         view.tvEmail.text = user.email
         view.tvPhone.text = user.phone
 
-        view.btnLink.setOnClickListener{
+        view.btnLink.setOnClickListener {
             openLink(user.website)
         }
 
-        view.btnSendEmail.setOnClickListener{
+        view.btnSendEmail.setOnClickListener {
             sendEmail(user.email)
         }
 
@@ -106,7 +106,6 @@ class UserAdapter(val context: Context) : BaseExpandableListAdapter() {
         notifyDataSetChanged()
     }
 
-
     private fun openLink(url: String) {
         val intent =
             Intent(Intent.ACTION_VIEW, Uri.parse("https://$url"))
@@ -115,10 +114,11 @@ class UserAdapter(val context: Context) : BaseExpandableListAdapter() {
     }
 
     private fun sendEmail(email: String) {
-        val subject = "${context.getString(R.string.email_from)} ${context.getString(R.string.app_name)}"
+        val subject =
+            "${context.getString(R.string.email_from)} ${context.getString(R.string.app_name)}"
         val message = context.getString(R.string.hello)
 
-        val intent= Intent(Intent.ACTION_SEND).apply {
+        val intent = Intent(Intent.ACTION_SEND).apply {
             data = Uri.parse("mailto:")
             type = "text/plain"
 
@@ -128,9 +128,18 @@ class UserAdapter(val context: Context) : BaseExpandableListAdapter() {
         }
 
         try {
-            context.startActivity(Intent.createChooser(intent, context.getString(R.string.choose_email_client)))
+            context.startActivity(
+                Intent.createChooser(
+                    intent,
+                    context.getString(R.string.choose_email_client)
+                )
+            )
         } catch (e: Exception) {
-            Toast.makeText(context, context.getString(R.string.email_client_not_selected), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context,
+                context.getString(R.string.email_client_not_selected),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

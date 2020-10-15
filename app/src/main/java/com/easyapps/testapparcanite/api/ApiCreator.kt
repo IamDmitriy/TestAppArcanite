@@ -1,10 +1,11 @@
 package com.easyapps.testapparcanite.api
+
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 const val baseUrl = "https://jsonplaceholder.typicode.com"
 
-class Client {
+class ApiCreator {
     private val retrofit: Retrofit =
         Retrofit.Builder()
             .baseUrl(baseUrl)

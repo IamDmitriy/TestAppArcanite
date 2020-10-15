@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="4dp"
-    android:layout_marginTop="4dp"
     android:layout_gravity="top"
-    android:descendantFocusability="blocksDescendants">
+    android:layout_marginTop="4dp"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="4dp">
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="SomeName"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
+        tools:text="SomeName" />
 
     <TextView
         android:id="@+id/tvEmailLabel"
@@ -25,9 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/e_mail_label"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvName"
-        android:textStyle="bold"/>
+        app:layout_constraintTop_toBottomOf="@id/tvName" />
 
     <TextView
         android:id="@+id/tvEmail"
@@ -44,9 +44,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/phone_label"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvEmailLabel"
-        android:textStyle="bold"/>
+        app:layout_constraintTop_toBottomOf="@id/tvEmailLabel" />
 
     <TextView
         android:id="@+id/tvPhone"
